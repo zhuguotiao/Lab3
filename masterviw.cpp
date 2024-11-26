@@ -1,6 +1,7 @@
 #include "masterviw.h"
 #include "ui_masterviw.h"
 #include <QDebug>
+#include "idatabase.h"
 
 MasterViw::MasterViw(QWidget *parent)
     : QWidget(parent)
@@ -12,6 +13,9 @@ MasterViw::MasterViw(QWidget *parent)
 
     //初始化跳转到登录页面
     goLoginView();
+
+    IDatabase::getInstance();
+
 }
 
 MasterViw::~MasterViw()

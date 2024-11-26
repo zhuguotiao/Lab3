@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>527</width>
+    <height>387</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>登录</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>401</width>
-     <height>291</height>
+     <x>120</x>
+     <y>50</y>
+     <width>250</width>
+     <height>224</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
