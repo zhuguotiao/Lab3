@@ -39,6 +39,13 @@ signals:
 
 public:
     bool initPatientModel();
+    //查找函数
+    bool searchPatient(QString filter);
+    //删除患者
+    bool deleteCurrentPatient();
+    bool submitPatientEdit();
+    void revertPatientEdit();
+
     //数据模型
     QSqlTableModel * patientTabModel;
     //选择模型
