@@ -1,5 +1,6 @@
 #include "loginview.h"
 #include "ui_loginview.h"
+#include "QDebug"
 
 LoginView::LoginView(QWidget *parent) :
     QWidget(parent),
@@ -12,3 +13,10 @@ LoginView::~LoginView()
 {
     delete ui;
 }
+
+void LoginView::on_btSignIn_clicked()
+{
+    emit loginSuccess();
+    qDebug()<<"发送信号成功";
+}
+
