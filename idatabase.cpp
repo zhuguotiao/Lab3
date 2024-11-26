@@ -27,6 +27,43 @@ void IDatabase::initDatabase()
 
 }
 
+bool IDatabase::initPatientModel()
+{
+    patientTabModel=new QSqlTableModel(this,database);
+    patientTabModel->setTable("patient");
+    //设置数据保存方式，按行还是按列
+    patientTabModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    //设置排序方式
+    patientTabModel->setSort(patientTabModel->fieldIndex("name"),Qt::AscendingOrder);
+    if(!(patientTabModel->select()))
+        return false;
+
+    thePatientSelection=new QItemSelectionModel(patientTabModel);
+    return true;
+}
+
+QString IDatabase::userLogin(QString username, QString password)
+{
+    QSqlQuery query;
+    query.prepare("select username,password from user where username= :USER");
+    query.bindValue(":USER",username);
+    query.exec();
+    if(query.first() && query.value("username").isValid()){
+        QString passwd=query.value("password").toString();
+        if(passwd==password){
+            qDebug()<< "loginOK";
+            return "loginOK";
+        }else{
+            qDebug()<< "wrongPassword";
+            return "loginFailed";
+        }
+    }else{
+        qDebug()<<"no such user";
+        return "loginFailed";
+    }
+
+}
+
 IDatabase::IDatabase(QObject *parent)
     : QObject{parent}
 {
