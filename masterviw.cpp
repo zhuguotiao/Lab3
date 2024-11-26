@@ -64,12 +64,15 @@ void MasterViw::goDepartmentView()
     pushWidgetToStackView(departmentView);
 }
 
-void MasterViw::goPatientEditView()
+void MasterViw::goPatientEditView(int rowNo)
 {
     qDebug() << "跳转到患者编辑页面";
 
-    patientEditView=new PatientEditView(this);
+    patientEditView=new PatientEditView(this,rowNo);
     pushWidgetToStackView(patientEditView);
+
+    connect(patientEditView, &PatientEditView::goPreviousView, this, &MasterViw::goPreviousView);;
+
 }
 
 void MasterViw::goPatientView()

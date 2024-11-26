@@ -1,5 +1,5 @@
 #include "idatabase.h"
-
+#include <QUuid>
 
 void IDatabase::initDatabase()
 {
@@ -13,17 +13,6 @@ void IDatabase::initDatabase()
      }else{
         qDebug()<<"open database successfully";
     }
-
-    // 验证数据库是否正确
-            // QSqlQuery query(database);
-            // if (query.exec("SELECT name FROM sqlite_master WHERE type='table'")) {
-            //     while (query.next()) {
-            //         qDebug() << "Found table:" << query.value(0).toString();
-            //     }
-            // } else {
-            //     qDebug() << "Failed to execute query:" << query.lastError().text();
-            // }
-
 
 }
 
@@ -64,6 +53,23 @@ bool IDatabase::submitPatientEdit()
 void IDatabase::revertPatientEdit()
 {
     patientTabModel->revertAll();
+}
+
+int IDatabase::addNewPatient()
+{
+    //在末尾添加一个记录
+    patientTabModel->insertRow(patientTabModel->rowCount(),QModelIndex());
+    //创建最后一行的MOdelIndex
+    QModelIndex curIndex=patientTabModel->index(patientTabModel->rowCount()-1,1);
+
+    int curRecNo=curIndex.row();
+    QSqlRecord curRec=patientTabModel->record(curRecNo);
+    curRec.setValue("CREATEDTIMESTAMP",QDateTime::currentDateTime().toString("yyyy-MM-dd"));
+    curRec.setValue("ID",QUuid::createUuid().toString(QUuid::WithBraces));
+
+    patientTabModel->setRecord(curRecNo,curRec);
+
+    return curIndex.row();
 }
 
 QString IDatabase::userLogin(QString username, QString password)

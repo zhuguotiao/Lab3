@@ -46,6 +46,8 @@ public:
     bool submitPatientEdit();
     void revertPatientEdit();
 
+    int addNewPatient();
+
     //数据模型
     QSqlTableModel * patientTabModel;
     //选择模型

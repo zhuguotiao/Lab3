@@ -2,7 +2,7 @@
 #define PATIENTVIEW_H
 
 #include <QWidget>
-#include <QDataWidgetMapper>
+
 
 namespace Ui {
 class PatientView;
@@ -26,12 +26,12 @@ private slots:
     void on_btEdit_clicked();
 
 signals:
-    void goPatientEditView();
+    void goPatientEditView(int index);
 
 private:
     Ui::PatientView *ui;
 
-    QDataWidgetMapper *dataMapper;
+
 };
 
 #endif // PATIENTVIEW_H
